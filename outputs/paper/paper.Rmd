@@ -1,8 +1,8 @@
 ---
-title: "My title"
+title: "TITLE"
 subtitle: "My subtitle if needed"
 author: 
-  - First author
+  - Bo Phi
   - Another author
 thanks: "Code and data are available at: LINK."
 date: "`r format(Sys.time(), '%d %B %Y')`"

@@ -1,4 +1,4 @@
-# starter_folder
+
 
 Overview
 
@@ -8,6 +8,6 @@ More information on the dataset can be found on Open Data Toronto.
 
 Contents
 
-Csv files (raw and cleaned) can be found in /inputs/data
-R scripts can be found in /scripts
-R markdown, references, and the final pdf can be found in /outputs/paper
+Csv files (raw and cleaned) can be found in /inputs/data.
+R scripts can be found in /scripts.
+R markdown, references, and the final pdf can be found in /outputs/paper.

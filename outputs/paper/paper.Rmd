@@ -1,6 +1,6 @@
 ---
 title: "TITLE"
-subtitle: "My subtitle ifl needed bruh"
+subtitle: "My subtitle if needed bruh"
 author: 
   - Bo Phi
   - Another author

@@ -1,12 +1,12 @@
 ---
-title: "TITLE"
-subtitle: "My subtitle if needed bruh"
+title: "The COVID-19 Numbers are just the tip of the Iceberg"
+subtitle: "The data we simply can't trace"
 author: 
   - Bo Phi
-  - Another author
-thanks: "Code and data are available at: LINK."
+
+thanks: "Code and data are available at: https://github.com/bophiwork/paper-1"
 date: "`r format(Sys.time(), '%d %B %Y')`"
-abstract: "First sentence. Second sentence. Third sentence. Fourth sentence."
+abstract: "During the recent pandemic, the datasets surrounding the COVID-19 virus have played an important role in navigating the future to move forward around the pandemic, however, the manner in which cases are reported could have effects on the credibility and integrity of the data. This statistical report uses data gathered by the city of Toronto to (1) examine the ways in which the cases have been recorded over time along with the metadata that is attached to each case, and (2), discuss the ways in which the data has an influence on peoples actions, and how those actions are further reflected within the data. With the number of cases having reached a record amount at the end of 2021, it is important to explore possible explanations for why that is the case. Additionally, with many of the direct sources of cases, and many cases also going unreported, it makes it incredibly difficult to estimate the true magnitude of the pandemic in Toronto."
 output:
   bookdown::pdf_document2
 toc: FALSE
@@ -18,48 +18,59 @@ knitr::opts_chunk$set(echo = TRUE)
 
 library(tidyverse)
 library(palmerpenguins)
+library(tinytex)
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+library(dplyr)
+library(here)
+library(bookdown)
+library(ggplot2)
+
+reduced_data <- readr::read_csv("/cloud/project/inputs/data/reduced_data.csv"
+                      )
 ```
 
 # Introduction
 
-You can and should cross-reference sections and sub-sections. For instance, Section \@ref(data). R Markdown automatically makes the sections lower case and adds a dash to spaces to generate labels, for instance, Section \@ref(first-discussion-point). 
+Since the beginning of 2020, the world has been struck by a global pandemic. A handful of politicians took the early signs of the pandemic very seriously and went into early preventative measures while many politicians did not. As a result, the virus began to spread like wildfire. Before very long, nearly all countries began the process of shutting down, closing nearly all parts of the economy to protect the world from this virus. In the United States, the President openly expressed control over the situation, assuring the cases were being reported but outbreaks were being contained. Soon after that, hospitals began to be flooded with COVID-19 patients and schools began to close as a result. After the development of the vaccine, people have been in a rush to get their immunization but a reasonable chunk of people still opt out of getting vaccines. There are a multitude of reasons for opting out of the vaccine but one of the most common reasons is the lack of belief in the vaccine. People who opt out of vaccines also have a lack of belief in the data and the governmental bodies that collect the data as well. Are their reasons justified?
 
+Two years later in 2022, the same problems are still present. The pandemic has seen no real end and cases have spiked up to the tail end of 2021.  Millions of people have died and there are still skeptical people on the validity of the data associated with COVID-19. Good data would serve as an important tool to inform the public and governing officials on choices they make but as it stands, the effectiveness of the current data doesn’t seem to be convincing enough people to work towards ending the pandemic. With new variants emerging and the world itching for things to go back to normal, examining why the current model isn’t working in an effort to suggest a better one seems appealing but is it even possible?
+
+The importance of truthful pandemic statistics in informing the public cannot be understated as it seemingly determines the rate at which the world can move past COVID-19. For this report, I will be using an open-access dataset from the Toronto Public Health organization to examine the metadata that is associated with a report of a case. More importantly, I will use the data to discuss the ways in which the data is somewhat incomplete and incapable of telling the full story of the pandemic. The data will be processed and analyzed in R [@citeR] using the ‘tidyverse’ [@tidy] amd ‘dplyr’ [@dplyr] packages. The packages ‘knitr’ [@knitr], ‘bookdown’ [@bookdown], and ‘tinytex’ [@tinytex] are also used to generate the final markdown report.
 
 
 # Data
 
-Our data is of penguins (Figure \@ref(fig:bills)).
+```{r echo = FALSE}
+head(reduced_data)
+```
 
-```{r bills, fig.cap="Bills of penguins", echo = FALSE}
-ggplot(penguins, aes(x = island, fill = species)) +
-  geom_bar(alpha = 0.8) +
-  scale_fill_manual(values = c("darkorange","purple","cyan4"),
-                    guide = FALSE) +
-  theme_minimal() +
-  facet_wrap(~species, ncol = 1) +
-  coord_flip()
+Our data is of penguins (Figure \@ref(fig:episodes)).
+
+```{r episodes, fig.cap="Episode Dates in Toronto", echo = FALSE, fig.width=8, fig.height=4}
+counts <- table(reduced_data$`Episode Date`)
+barplot(counts, main="COVID-19 Cases in Toronto",
+   xlab="Dates")
 ```
 
 Talk more about it.
 
-Also bills and their average (Figure \@ref(fig:billssssss)). (Notice how you can change the height and width so they don't take the whole page?)
+Also bills and their average (Figure \@ref(fig:ages)). 
 
-```{r billssssss, fig.cap="More bills of penguins", echo = FALSE, fig.width=8, fig.height=4}
-
-# This needs to be about the random data tha tI sasmpled?
-ggplot(penguins, aes(x = island, fill = species)) +
-  geom_bar(alpha = 0.8) +
-  scale_fill_manual(values = c("darkorange","purple","cyan4"),
-                    guide = FALSE) +
-  theme_minimal() +
-  facet_wrap(~species, ncol = 1) +
-  coord_flip()
+```{r ages, fig.cap="Age Ranges of Infected People", echo = FALSE, fig.width=8, fig.height=15}
+ranges <- table(reduced_data$`Age Group`)
+barplot(ranges, main="Age Groups Infected by COVID-19", horiz = TRUE,
+        ylab="Age Ranges")
 ```
 
 Talk way more about it. 
 
-
-
+```{r sources, fig.cap="Source of COVID-19 Contractions", echo = FALSE, fig.width=10, fig.height=15}
+places <- table(reduced_data$`Source of Infection`)
+barplot(places, main="Source of COVID-19 Cases", horiz = TRUE,
+        ylab="Sources")
+```
 # Model
 
 \begin{equation}
